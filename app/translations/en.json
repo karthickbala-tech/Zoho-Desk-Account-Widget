@@ -1,0 +1,17 @@
+{
+  "accountTitle": "Account",
+  "loading": "Loading account details...",
+  "noAccount": "No account associated with this ticket.",
+  "error": "Unable to load account details.",
+  "retry": "Retry",
+  "accountName": "Account Name",
+  "accountOwner": "Account Owner",
+  "email": "Email",
+  "phone": "Phone",
+  "website": "Website",
+  "address": "Address",
+  "createdTime": "Created Time",
+  "layout": "Layout",
+  "description": "Description"
+}
+

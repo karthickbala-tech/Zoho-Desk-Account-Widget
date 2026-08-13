@@ -1,0 +1,42 @@
+{
+  "locale": [
+    "en"
+  ],
+  "service": "DESK",
+  "storage": false,
+  "type": "personal",
+  "whiteListedDomains": [
+  "https://desk.zoho.in"
+],
+  "modules": {
+    "widgets": [
+      {
+        "location": "desk.ticket.detail.rightpanel",
+        "url": "/app/widget.html",
+        "name": "Account Widget",
+        "logo": "/app/img/logo.png",
+        "icon": "/app/img/icon.png"
+      }
+    ]
+  },
+  "cspDomains": {
+  "connect-src": [
+    "https://desk.zoho.in"
+  ]
+},
+"zohoAuthorisation": {},
+"connectors": [{
+  "connectionLinkName": "deskaccountconnection",
+  "connectionName": "Desk Account Connection",
+  "serviceName": "zoho_desk",
+  "userAccess": true,
+  "isUserDefinedService": false,
+  "sharedBy": "60082726058",
+  "scope": [
+    "Desk.tickets.READ",
+    "Desk.accounts.READ"
+  ]
+}],
+"config": [],
+"moduleSupport": false
+}
