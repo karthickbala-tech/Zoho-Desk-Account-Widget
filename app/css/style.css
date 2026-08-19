@@ -1,9 +1,14 @@
+/**
+ * Zoho Desk Marketplace Account Widget Stylesheet
+ * Production-ready, framework-free, responsive CSS for Zoho Desk extensions.
+ */
+
 :root {
     --zd-bg-primary: #ffffff;
     --zd-bg-secondary: #f7f8fa;
     --zd-bg-hover: #f0f3f5;
     --zd-border: #e5e7eb;
-    --zd-border-hover: #d1d5db;
+    --zd-border-hover: #e5e7eb;
     --zd-text-primary: #1f2937;
     --zd-text-secondary: #667085;
     --zd-text-muted: #9aa4b2;
@@ -11,53 +16,76 @@
     --zd-link-hover: #1e40af;
 }
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
     padding: 12px;
-    background: var(--zd-bg-primary);
+    background: #f6f8fb;
     color: var(--zd-text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* ==========================================
+   ACCOUNT WIDGET
+   ========================================== */
+
 .account-widget {
+    width: 100%;
     background: var(--zd-bg-primary);
     border: 1px solid var(--zd-border);
     border-radius: 6px;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 14px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
 }
+
+/* ==========================================
+   ACCOUNT HEADER
+   ========================================== */
 
 .account-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 12px;
-    background: var(--zd-bg-secondary);
-    border-bottom: 1px solid var(--zd-border);
+    width: calc(100% - 12px);
+    padding: 8px 12px;
+    margin: 6px;
+    border-radius: 5px;
+    border: none;
+    background: var(--zd-bg-primary);
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.15s ease;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    transition: background-color 0.2s ease, outline-color 0.2s ease;
 }
 
 .account-header:hover {
     background: var(--zd-bg-hover);
 }
 
-.account-header:focus {
-    outline: 2px solid rgba(29, 78, 216, 0.2);
+.account-header:focus-visible {
+    outline: 2px solid rgba(29, 78, 216, 0.35);
     outline-offset: -2px;
 }
 
 .account-title {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     color: var(--zd-text-primary);
+    letter-spacing: -0.2px;
+    margin: 0;
+    line-height: 1.3;
 }
 
 .account-toggle {
@@ -65,33 +93,52 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--zd-text-secondary);
-    transition: transform 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
 }
 
-.account-toggle i {
-    font-size: 15px;
+.account-toggle i,
+.account-toggle svg {
+    font-size: 13px;
     line-height: 1;
 }
 
-.account-header[aria-expanded='true'] .account-toggle {
+.account-header[aria-expanded="true"] .account-toggle {
     transform: rotate(180deg);
 }
 
+/* ==========================================
+   ACCOUNT CONTENT
+   ========================================== */
+
 .account-content {
     background: var(--zd-bg-primary);
-    overflow: hidden;
-    transition: max-height 0.2s ease, opacity 0.2s ease, padding 0.2s ease;
+    display: block;
+    width: 100%;
+    max-height: 2000px;
     opacity: 1;
-    max-height: 900px;
-    padding: 12px;
+    overflow: hidden;
+    padding: 0 6px 6px;
+    transition:
+        max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.25s ease,
+        padding 0.35s ease;
 }
 
-.account-content[aria-hidden='true'] {
+.account-content[aria-hidden="true"] {
     max-height: 0;
     opacity: 0;
     padding-top: 0;
     padding-bottom: 0;
+    pointer-events: none;
+    visibility: hidden;
 }
+
+/* ==========================================
+   STATES
+   ========================================== */
 
 .state-loading,
 .state-success,
@@ -105,54 +152,119 @@ body {
     align-items: center;
     gap: 8px;
     min-height: 36px;
+    padding: 8px 10px;
     color: var(--zd-text-secondary);
-    font-size: 12px;
-    padding: 4px 0;
+    font-size: 13px;
 }
 
 .spinner-border-sm {
+    display: inline-block;
     width: 0.9rem;
     height: 0.9rem;
-    border-width: 2px;
-    border-color: var(--zd-text-muted);
+    vertical-align: -0.125em;
+    border: 2px solid var(--zd-text-muted);
     border-right-color: transparent;
+    border-radius: 50%;
+    animation: zd-spinner-border 0.75s linear infinite;
+    flex-shrink: 0;
 }
+
+@keyframes zd-spinner-border {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================
+   ACCOUNT DETAILS
+   ========================================== */
 
 .account-details {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    gap: 2px;
 }
+
+/* ==========================================
+   PROPERTY ROW
+   ========================================== */
 
 .detail-row {
-    display: grid;
-    grid-template-columns: 110px minmax(0, 1fr);
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--zd-border);
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px 10px;
+    margin: 0;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background: transparent;
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
 }
 
-.detail-row:last-child {
-    border-bottom: none;
+/* Hover the complete property area, just like an interactive Zoho Desk property */
+.detail-row:hover {
+    background: var(--zd-bg-hover);
+    transform: translateY(-1px);
 }
+
+.detail-row:active {
+    transform: translateY(0);
+}
+
+.detail-row:focus-within {
+    background: var(--zd-bg-hover);
+    outline: none;
+}
+
+/* ==========================================
+   PROPERTY LABEL
+   ========================================== */
 
 .detail-label {
+    display: block;
+    margin: 0 0 4px 0;
     color: var(--zd-text-secondary);
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.5;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    position: relative;
 }
+
+/* Remove default pseudo colon after label */
+.detail-label::after {
+    content: none;
+}
+
+/* ==========================================
+   PROPERTY VALUE
+   ========================================== */
 
 .detail-value {
+    display: block;
+    margin: 0;
     color: var(--zd-text-primary);
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 700;
     line-height: 1.5;
     word-break: break-word;
+    overflow-wrap: anywhere;
+    min-height: 21px;
 }
 
+/* ==========================================
+   DESCRIPTION
+   ========================================== */
+
 .detail-row.detail-description {
-    display: block;
-    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px 10px;
+    margin: 0;
 }
 
 .detail-row.detail-description .detail-label {
@@ -160,9 +272,23 @@ body {
     margin-bottom: 4px;
 }
 
+.detail-row.detail-description .detail-value {
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   LINKS
+   ========================================== */
+
 .detail-value a {
     color: var(--zd-link);
+    font-size: 10px;
+    font-weight: 600;
     text-decoration: none;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    transition: color 0.15s ease, text-decoration 0.15s ease;
 }
 
 .detail-value a:hover {
@@ -170,30 +296,73 @@ body {
     text-decoration: underline;
 }
 
+/* ==========================================
+   EMPTY / NULL VALUES
+   ========================================== */
+
+.detail-value:empty::after {
+    content: "—";
+    color: var(--zd-text-muted);
+    font-weight: 400;
+}
+
+/* ==========================================
+   NO ACCOUNT / ERROR
+   ========================================== */
+
 .state-no-account,
 .state-error {
     color: var(--zd-text-secondary);
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
-    padding: 8px 0;
+    padding: 10px;
+}
+
+.state-no-account p,
+.state-error p {
+    margin: 0;
 }
 
 .state-error p {
-    margin: 0 0 10px 0;
+    margin-bottom: 10px;
 }
 
+/* ==========================================
+   RETRY BUTTON
+   ========================================== */
+
 .state-error .btn-outline-secondary {
-    font-size: 12px;
-    padding: 4px 10px;
-    border-color: var(--zd-border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border: 1px solid var(--zd-border);
     color: var(--zd-text-primary);
     background: var(--zd-bg-primary);
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
 }
 
 .state-error .btn-outline-secondary:hover {
     background: var(--zd-bg-hover);
     border-color: var(--zd-border-hover);
 }
+
+.state-error .btn-outline-secondary:focus-visible {
+    outline: 2px solid rgba(29, 78, 216, 0.35);
+    outline-offset: 1px;
+}
+
+/* ==========================================
+   VISUALLY HIDDEN
+   ========================================== */
 
 .visually-hidden {
     position: absolute;
@@ -207,50 +376,81 @@ body {
     border: 0;
 }
 
-
 /* ==========================================
    RESPONSIVE
    ========================================== */
 
-/* For smaller panels */
 @media (max-width: 380px) {
+    body {
+        padding: 8px;
+    }
+
     .account-widget {
-        font-size: 12px;
+        font-size: 13px;
     }
 
-    .detail-row {
-        grid-template-columns: 1fr;
-        gap: 4px;
-        padding: 8px 0;
-    }
-
-    .detail-label {
-        font-size: 11px;
-    }
-
-    .detail-value {
-        font-size: 12px;
+    .account-title {
+        font-size: 16px;
     }
 
     .account-header {
-        padding: 10px 12px;
+        padding: 10px 13px;
+        margin: 5px;
+        width: calc(100% - 8px);
     }
 
     .account-content {
-        padding: 10px 12px;
+        padding: 0 12px 4px;
+    }
+
+    .detail-row {
+        padding: 7px 8px;
+    }
+
+    .detail-label {
+        font-size: 12px;
+    }
+
+    .detail-value,
+    .detail-value a {
+        font-size: 14px;
     }
 }
 
 /* ==========================================
-   PRINT STYLES
+   PRINT
    ========================================== */
 
 @media print {
+    body {
+        background: #ffffff;
+        padding: 0;
+    }
+
     .account-widget {
+        border: 1px solid #d1d5db;
+        box-shadow: none;
         page-break-inside: avoid;
     }
 
     .account-header {
-        background-color: #f8f9fa;
+        background-color: #f8f9fa !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .account-content[aria-hidden="true"] {
+        max-height: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .account-toggle {
+        display: none;
+    }
+
+    .detail-row:hover {
+        background: transparent;
+        transform: none;
     }
 }
