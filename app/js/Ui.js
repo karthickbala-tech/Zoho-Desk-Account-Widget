@@ -170,8 +170,8 @@ class AccountWidgetUI {
         }
 
         const safeValue = this.normalizeValue(value);
-        if (safeValue === '—') {
-            element.textContent = '—';
+        if (safeValue === '-') {
+            element.textContent = '-';
             return;
         }
 
@@ -197,17 +197,17 @@ class AccountWidgetUI {
 
     normalizeValue(value) {
         if (value === null || value === undefined || value === '') {
-            return '—';
+            return '-';
         }
 
         if (typeof value === 'string') {
             const trimmed = value.trim();
-            return trimmed ? trimmed : '—';
+            return trimmed ? trimmed : '-';
         }
 
         if (typeof value === 'object') {
             if (Array.isArray(value)) {
-                return value.length ? value.join(', ') : '—';
+                return value.length ? value.join(', ') : '-';
             }
             if (value.name) {
                 return value.name;
@@ -215,7 +215,7 @@ class AccountWidgetUI {
             if (value.label) {
                 return value.label;
             }
-            return '—';
+            return '-';
         }
 
         return value;
@@ -223,7 +223,7 @@ class AccountWidgetUI {
 
     truncateText(text, maxLength = 120) {
         if (typeof text !== 'string') {
-            return '—';
+            return '-';
         }
         return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
     }
@@ -238,7 +238,7 @@ class AccountWidgetUI {
     }
 
     getAccountName(account) {
-        return account.accountName || account.name || account.companyName || '—';
+        return account.accountName || account.name || account.companyName || '-';
     }
 
     getOwnerDisplay(account) {
@@ -246,25 +246,25 @@ class AccountWidgetUI {
             return account.ownerName;
         }
         if (typeof account.owner === 'object' && account.owner) {
-            return account.owner.name || account.owner.fullName || account.owner.email || '—';
+            return account.owner.name || account.owner.fullName || account.owner.email || '-';
         }
-        return account.owner || account.accountOwner || '—';
+        return account.owner || account.accountOwner || '-';
     }
 
     getAccountType(account) {
-        return account.accountType || account.type || account.companyType || '—';
+        return account.accountType || account.type || account.companyType || '-';
     }
 
     getEmail(account) {
-        return account.email || account.primaryEmail || account.contactEmail || '—';
+        return account.email || account.primaryEmail || account.contactEmail || '-';
     }
 
     getPhone(account) {
-        return account.phone || account.mobile || account.contactNumber || '—';
+        return account.phone || account.mobile || account.contactNumber || '-';
     }
 
     getWebsite(account) {
-        return account.website || account.webUrl || account.websiteUrl || '—';
+        return account.website || account.webUrl || account.websiteUrl || '-';
     }
 
     getAddress(account) {
@@ -273,28 +273,28 @@ class AccountWidgetUI {
             account.city,
             account.state,
             account.country
-        ].filter((part) => this.normalizeValue(part) !== '—');
+        ].filter((part) => this.normalizeValue(part) !== '-');
 
-        return parts.length ? parts.join(', ') : '—';
+        return parts.length ? parts.join(', ') : '-';
     }
 
     getDescription(account) {
-        return account.description || account.notes || '—';
+        return account.description || account.notes || '-';
     }
 
     getLayoutName(account) {
         if (!account.layoutDetails) {
-            return account.layout || '—';
+            return account.layout || '-';
         }
         if (typeof account.layoutDetails === 'string') {
             return account.layoutDetails;
         }
-        return account.layoutDetails.name || account.layoutDetails.layoutName || account.layout || '—';
+        return account.layoutDetails.name || account.layoutDetails.layoutName || account.layout || '-';
     }
 
     getFormattedDate(value) {
         if (!value) {
-            return '—';
+            return '-';
         }
 
         const date = new Date(value);

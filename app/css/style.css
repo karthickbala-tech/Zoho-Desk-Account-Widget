@@ -301,9 +301,7 @@ body {
    ========================================== */
 
 .detail-value:empty::after {
-    content: "—";
-    color: var(--zd-text-muted);
-    font-weight: 400;
+    content: "-";
 }
 
 /* ==========================================
